@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy New Year 2026 🎉</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Stage 1: Name Input -->
+        <div class="stage active" id="stage1">
+            <h1>🎊 Happy New Year 2026! 🎊</h1>
+            <p class="subtitle">Let's celebrate in a FUN way! 🎉</p>
+
+            <div class="input-group">
+                <p style="color: #666; margin-bottom: 15px;">First, tell us your awesome name:</p>
+                <input type="text" id="nameInput" placeholder="Enter your name here..." autocomplete="off">
+                <button class="btn" onclick="goToGestures()">Let's Have Fun! 🚀</button>
+            </div>
+        </div>
+
+        <!-- Stage 2: Gesture Selection -->
+        <div class="stage" id="stage2">
+            <h2>Choose Your Celebration Gesture! 🎪</h2>
+            <p class="subtitle">Pick your favorite way to celebrate:</p>
+
+            <div class="gesture-grid">
+                <button class="gesture-btn" onclick="selectGesture('🎉', 'Happy Dance')">
+                    🎉
+                    <span class="gesture-label">Happy Dance</span>
+                </button>
+                <button class="gesture-btn" onclick="selectGesture('🎊', 'Confetti Throw')">
+                    🎊
+                    <span class="gesture-label">Confetti Throw</span>
+                </button>
+                <button class="gesture-btn" onclick="selectGesture('🎈', 'Balloon Pop')">
+                    🎈
+                    <span class="gesture-label">Balloon Pop</span>
+                </button>
+                <button class="gesture-btn" onclick="selectGesture('✨', 'Magic Sparkle')">
+                    ✨
+                    <span class="gesture-label">Magic Sparkle</span>
+                </button>
+                <button class="gesture-btn" onclick="selectGesture('🎆', 'Fireworks')">
+                    🎆
+                    <span class="gesture-label">Fireworks</span>
+                </button>
+                <button class="gesture-btn" onclick="selectGesture('🍾', 'Toast & Cheer')">
+                    🍾
+                    <span class="gesture-label">Toast & Cheer</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Stage 3: Final Celebration -->
+        <div class="stage" id="stage3">
+            <div class="emoji-celebration" id="gestureEmoji"></div>
+            <div class="name-display" id="nameDisplay"></div>
+
+            <div class="celebration-box">
+                <div class="celebration-text">🎆 HAPPY NEW YEAR 2026! 🎆</div>
+            </div>
+
+            <div class="greeting-text">
+                <p id="greetingMessage"></p>
+                <p style="margin-top: 20px; font-weight: bold; color: var(--color-primary);" id="familyGreeting"></p>
+            </div>
+
+            <div class="stats-box">
+                <div class="stat-item">
+                    <div class="stat-label">Days Ahead</div>
+                    <div class="stat-value" id="daysRemaining">365</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Your Gesture</div>
+                    <div class="stat-value" id="gestureDisplay"></div>
+                </div>
+            </div>
+
+            <div class="final-message">
+                <p>May this year bring you:</p>
+                <p>✨ Success in all your endeavors<br>
+                    💪 Strength to overcome challenges<br>
+                    😊 Joy and happiness every day<br>
+                    🚀 New opportunities and growth</p>
+            </div>
+
+            <button class="btn" onclick="restartCelebration()" style="width: 100%; margin-top: 20px;">
+                Celebrate Again! 🎉
+            </button>
+        </div>
+    </div>
+
+    <script src="script.js"> </script>
+</body>
+
+</html>
