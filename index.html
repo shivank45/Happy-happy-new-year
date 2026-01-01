@@ -1,100 +1,690 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy New Year 2026 🎉</title>
-    <link rel="stylesheet" href="style.css">
-</head>
+    <title>Happy New Year 2026 - Personalized Greetings</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        :root {
+            --color-white: rgba(255, 255, 255, 1);
+            --color-black: rgba(0, 0, 0, 1);
+            --color-cream-50: rgba(252, 252, 249, 1);
+            --color-gray-300: rgba(167, 169, 169, 1);
+            --color-slate-500: rgba(98, 108, 113, 1);
+            --color-teal-500: rgba(33, 128, 141, 1);
+            --color-teal-600: rgba(29, 116, 128, 1);
+            --color-slate-900: rgba(19, 52, 59, 1);
+            --color-text: var(--color-slate-900);
+            --color-primary: var(--color-teal-500);
+            --color-primary-hover: var(--color-teal-600);
+            --color-background: var(--color-cream-50);
+            --color-surface: var(--color-white);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --color-background: #1a1a2e;
+                --color-surface: #16213e;
+                --color-text: #f0f0f0;
+            }
+        }
+
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 700px;
+            background: var(--color-surface);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .stage {
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .stage.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        h1 {
+            color: var(--color-primary);
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: var(--color-text);
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            color: var(--color-text);
+            font-weight: 600;
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            background: var(--color-background);
+            color: var(--color-text);
+            transition: all 0.3s ease;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 4px rgba(33, 128, 141, 0.1);
+        }
+
+        .gesture-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .gesture-btn {
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+            transform: scale(1);
+        }
+
+        .gesture-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
+        }
+
+        .gesture-btn:active {
+            transform: scale(0.98);
+        }
+
+        .gesture-btn.selected {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            box-shadow: 0 8px 25px rgba(245, 87, 108, 0.5);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 16px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .greeting-content {
+            text-align: center;
+            animation: popIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @keyframes popIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .greeting-text {
+            font-size: 2rem;
+            color: var(--color-primary);
+            margin: 20px 0;
+            font-weight: 700;
+        }
+
+        .name-display {
+            font-size: 2.5rem;
+            color: #f5576c;
+            font-weight: 800;
+            margin: 15px 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .gesture-display {
+            font-size: 5rem;
+            margin: 30px 0;
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .family-wishes {
+            background: rgba(102, 126, 234, 0.1);
+            padding: 25px;
+            border-radius: 12px;
+            margin: 25px 0;
+            border-left: 4px solid var(--color-primary);
+        }
+
+        .family-wishes p {
+            color: var(--color-text);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin: 12px 0;
+        }
+
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: #f5576c;
+            pointer-events: none;
+        }
+
+        .emoji-rain {
+            position: fixed;
+            font-size: 2rem;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .fireworks {
+            position: fixed;
+            width: 5px;
+            height: 5px;
+            background: #667eea;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .reset-btn {
+            margin-top: 25px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .stage-indicator {
+            text-align: center;
+            color: var(--color-text);
+            font-size: 0.9rem;
+            margin-top: 20px;
+            opacity: 0.7;
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-size: 0.95rem;
+            margin-top: 8px;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            h2 {
+                font-size: 1.4rem;
+            }
+
+            .container {
+                padding: 25px;
+            }
+
+            .gesture-buttons {
+                grid-template-columns: 1fr;
+            }
+
+            .greeting-text {
+                font-size: 1.6rem;
+            }
+
+            .name-display {
+                font-size: 2rem;
+            }
+
+            .gesture-display {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+</head>
 <body>
     <div class="container">
         <!-- Stage 1: Name Input -->
         <div class="stage active" id="stage1">
-            <h1>🎊 Happy New Year 2026! 🎊</h1>
-            <p class="subtitle">Let's celebrate in a FUN way! 🎉</p>
-
-            <div class="input-group">
-                <p style="color: #666; margin-bottom: 15px;">First, tell us your awesome name:</p>
-                <input type="text" id="nameInput" placeholder="Enter your name here..." autocomplete="off">
-                <button class="btn" onclick="goToGestures()">Let's Have Fun! 🚀</button>
+            <h1>🎉 Happy New Year 2026! 🎉</h1>
+            <h2>Let's Make This Personal!</h2>
+            <div class="form-group">
+                <label for="userName">What's your name?</label>
+                <input
+                    type="text"
+                    id="userName"
+                    placeholder="Enter your name..."
+                    maxlength="30"
+                />
+                <div class="error-message" id="nameError">
+                    Please enter a valid name
+                </div>
             </div>
+            <button class="btn" onclick="goToStage2()">Continue ➜</button>
+            <div class="stage-indicator">Step 1 of 3</div>
         </div>
 
         <!-- Stage 2: Gesture Selection -->
         <div class="stage" id="stage2">
-            <h2>Choose Your Celebration Gesture! 🎪</h2>
-            <p class="subtitle">Pick your favorite way to celebrate:</p>
-
-            <div class="gesture-grid">
-                <button class="gesture-btn" onclick="selectGesture('🎉', 'Happy Dance')">
-                    🎉
-                    <span class="gesture-label">Happy Dance</span>
+            <h2>Pick Your Gesture!</h2>
+            <p style="text-align: center; color: var(--color-text); margin-bottom: 25px;">
+                How do you celebrate the New Year? 🎊
+            </p>
+            <div class="gesture-buttons">
+                <button class="gesture-btn" onclick="selectGesture('🎆', 'stage2')">
+                    🎆<br />Fireworks
                 </button>
-                <button class="gesture-btn" onclick="selectGesture('🎊', 'Confetti Throw')">
-                    🎊
-                    <span class="gesture-label">Confetti Throw</span>
+                <button class="gesture-btn" onclick="selectGesture('🍾', 'stage2')">
+                    🍾<br />Champagne Pop
                 </button>
-                <button class="gesture-btn" onclick="selectGesture('🎈', 'Balloon Pop')">
-                    🎈
-                    <span class="gesture-label">Balloon Pop</span>
+                <button class="gesture-btn" onclick="selectGesture('🎊', 'stage2')">
+                    🎊<br />Confetti Dance
                 </button>
-                <button class="gesture-btn" onclick="selectGesture('✨', 'Magic Sparkle')">
-                    ✨
-                    <span class="gesture-label">Magic Sparkle</span>
-                </button>
-                <button class="gesture-btn" onclick="selectGesture('🎆', 'Fireworks')">
-                    🎆
-                    <span class="gesture-label">Fireworks</span>
-                </button>
-                <button class="gesture-btn" onclick="selectGesture('🍾', 'Toast & Cheer')">
-                    🍾
-                    <span class="gesture-label">Toast & Cheer</span>
+                <button class="gesture-btn" onclick="selectGesture('💃', 'stage2')">
+                    💃<br />Party Time
                 </button>
             </div>
+            <button class="btn" onclick="goToStage3()" id="continueBtn2" style="opacity: 0.5; cursor: not-allowed;" disabled>
+                Continue ➜
+            </button>
+            <div class="stage-indicator">Step 2 of 3</div>
         </div>
 
-        <!-- Stage 3: Final Celebration -->
+        <!-- Stage 3: Family Input -->
         <div class="stage" id="stage3">
-            <div class="emoji-celebration" id="gestureEmoji"></div>
-            <div class="name-display" id="nameDisplay"></div>
-
-            <div class="celebration-box">
-                <div class="celebration-text">🎆 HAPPY NEW YEAR 2026! 🎆</div>
+            <h2>Family Wishes! 👨‍👩‍👧‍👦</h2>
+            <div class="form-group">
+                <label for="familySize">How many family members do you want to wish?</label>
+                <select id="familySize" onchange="updateFamilyMembers()">
+                    <option value="0">Just Me 😊</option>
+                    <option value="1">1 Family Member</option>
+                    <option value="2">2 Family Members</option>
+                    <option value="3">3 Family Members</option>
+                    <option value="4">4+ Family Members</option>
+                </select>
             </div>
-
-            <div class="greeting-text">
-                <p id="greetingMessage"></p>
-                <p style="margin-top: 20px; font-weight: bold; color: var(--color-primary);" id="familyGreeting"></p>
-            </div>
-
-            <div class="stats-box">
-                <div class="stat-item">
-                    <div class="stat-label">Days Ahead</div>
-                    <div class="stat-value" id="daysRemaining">365</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-label">Your Gesture</div>
-                    <div class="stat-value" id="gestureDisplay"></div>
-                </div>
-            </div>
-
-            <div class="final-message">
-                <p>May this year bring you:</p>
-                <p>✨ Success in all your endeavors<br>
-                    💪 Strength to overcome challenges<br>
-                    😊 Joy and happiness every day<br>
-                    🚀 New opportunities and growth</p>
-            </div>
-
-            <button class="btn" onclick="restartCelebration()" style="width: 100%; margin-top: 20px;">
-                Celebrate Again! 🎉
+            <div id="familyNames"></div>
+            <button class="btn" onclick="generateGreeting()">
+                Generate My Greeting! 🎈
             </button>
+            <div class="stage-indicator">Step 3 of 3</div>
+        </div>
+
+        <!-- Stage 4: Final Greeting -->
+        <div class="stage" id="stage4">
+            <div class="greeting-content">
+                <h1>✨ Happy New Year 2026! ✨</h1>
+                <div id="gestureEmoji" class="gesture-display"></div>
+                <div class="greeting-text">Dear</div>
+                <div class="name-display" id="displayName"></div>
+                <div class="family-wishes" id="familyWishes"></div>
+                <p style="color: var(--color-text); font-size: 1.1rem; margin-top: 25px;">
+                    Wishing you prosperity, joy, and endless possibilities! 🌟
+                </p>
+                <button class="btn reset-btn" onclick="resetForm()">
+                    Create Another Greeting 🎁
+                </button>
+            </div>
         </div>
     </div>
 
-    <script src="script.js"> </script>
-</body>
+    <script>
+        let selectedGesture = null;
+        let selectedName = null;
+        let familyMembers = [];
 
+        function goToStage2() {
+            const nameInput = document.getElementById("userName").value.trim();
+            const nameError = document.getElementById("nameError");
+
+            if (!nameInput || nameInput.length < 2) {
+                nameError.classList.add("show");
+                return;
+            }
+
+            nameError.classList.remove("show");
+            selectedName = nameInput;
+            switchStage("stage1", "stage2");
+        }
+
+        function selectGesture(emoji, stage) {
+            document.querySelectorAll(".gesture-btn").forEach((btn) => {
+                btn.classList.remove("selected");
+            });
+
+            event.target.closest(".gesture-btn").classList.add("selected");
+            selectedGesture = emoji;
+
+            const continueBtn = document.getElementById("continueBtn2");
+            continueBtn.disabled = false;
+            continueBtn.style.opacity = "1";
+            continueBtn.style.cursor = "pointer";
+        }
+
+        function goToStage3() {
+            if (!selectedGesture) return;
+            switchStage("stage2", "stage3");
+        }
+
+        function updateFamilyMembers() {
+            const familySize = parseInt(
+                document.getElementById("familySize").value
+            );
+            const container = document.getElementById("familyNames");
+            container.innerHTML = "";
+            familyMembers = [];
+
+            if (familySize === 0) {
+                return;
+            }
+
+            for (let i = 0; i < familySize; i++) {
+                const div = document.createElement("div");
+                div.className = "form-group";
+                div.innerHTML = `
+                    <label for="family${i}">Family Member ${i + 1} Name:</label>
+                    <input
+                        type="text"
+                        id="family${i}"
+                        placeholder="e.g., Mom, Dad, Sister..."
+                        maxlength="30"
+                    />
+                `;
+                container.appendChild(div);
+            }
+        }
+
+        function generateGreeting() {
+            const familySize = parseInt(
+                document.getElementById("familySize").value
+            );
+
+            if (familySize > 0) {
+                const inputs = document.querySelectorAll("#familyNames input");
+                familyMembers = Array.from(inputs)
+                    .map((input) => input.value.trim())
+                    .filter((name) => name.length > 0);
+
+                if (familyMembers.length === 0) {
+                    alert("Please enter at least one family member name!");
+                    return;
+                }
+            }
+
+            switchStage("stage3", "stage4");
+            displayGreeting();
+            triggerCelebration();
+        }
+
+        function displayGreeting() {
+            document.getElementById("displayName").textContent = selectedName;
+            document.getElementById("gestureEmoji").textContent = selectedGesture;
+
+            let familyWishesHTML = `<h3 style="color: var(--color-primary); margin-bottom: 15px;">And All Your Family Members!</h3>`;
+
+            if (familyMembers.length > 0) {
+                familyWishesHTML += "<p>Especially sending warm wishes to:<br/><br/>";
+                familyMembers.forEach((member) => {
+                    familyWishesHTML += `<strong style="font-size: 1.15rem; color: #f5576c;">💖 ${member}</strong><br/>`;
+                });
+                familyWishesHTML += "</p>";
+            } else {
+                familyWishesHTML +=
+                    "<p>Sending all the joy and happiness to you and your loved ones! 💕</p>";
+            }
+
+            document.getElementById("familyWishes").innerHTML = familyWishesHTML;
+        }
+
+        function triggerCelebration() {
+            // Confetti effect
+            for (let i = 0; i < 50; i++) {
+                createConfetti();
+            }
+
+            // Emoji rain
+            const emojis = ["🎉", "🎊", "🎈", "🎆", "✨", "⭐", "💫"];
+            for (let i = 0; i < 20; i++) {
+                createEmojiRain(emojis[Math.floor(Math.random() * emojis.length)]);
+            }
+
+            // Fireworks
+            for (let i = 0; i < 30; i++) {
+                setTimeout(createFirework, Math.random() * 2000);
+            }
+        }
+
+        function createConfetti() {
+            const confetti = document.createElement("div");
+            confetti.className = "confetti";
+            confetti.style.left = Math.random() * window.innerWidth + "px";
+            confetti.style.top = "-10px";
+            confetti.style.background = [
+                "#667eea",
+                "#764ba2",
+                "#f093fb",
+                "#f5576c",
+                "#FFD700",
+            ][Math.floor(Math.random() * 5)];
+            confetti.style.transform =
+                "rotate(" + Math.random() * 360 + "deg)";
+
+            document.body.appendChild(confetti);
+
+            let top = 0;
+            const speed = Math.random() * 5 + 5;
+            const drift = Math.random() * 4 - 2;
+
+            const interval = setInterval(() => {
+                top += speed;
+                confetti.style.top = top + "px";
+                confetti.style.left =
+                    parseFloat(confetti.style.left) + drift + "px";
+                confetti.style.opacity = 1 - top / window.innerHeight;
+
+                if (top > window.innerHeight) {
+                    clearInterval(interval);
+                    confetti.remove();
+                }
+            }, 20);
+        }
+
+        function createEmojiRain(emoji) {
+            const emojiEl = document.createElement("div");
+            emojiEl.className = "emoji-rain";
+            emojiEl.textContent = emoji;
+            emojiEl.style.left = Math.random() * window.innerWidth + "px";
+            emojiEl.style.top = "-40px";
+            emojiEl.style.opacity = "1";
+
+            document.body.appendChild(emojiEl);
+
+            let top = 0;
+            const speed = Math.random() * 6 + 4;
+            const drift = (Math.random() - 0.5) * 3;
+
+            const interval = setInterval(() => {
+                top += speed;
+                emojiEl.style.top = top + "px";
+                emojiEl.style.left =
+                    parseFloat(emojiEl.style.left) + drift + "px";
+                emojiEl.style.opacity = Math.max(0, 1 - top / window.innerHeight);
+
+                if (top > window.innerHeight) {
+                    clearInterval(interval);
+                    emojiEl.remove();
+                }
+            }, 30);
+        }
+
+        function createFirework() {
+            const x = Math.random() * window.innerWidth;
+            const y = Math.random() * (window.innerHeight * 0.6);
+
+            for (let i = 0; i < 20; i++) {
+                const firework = document.createElement("div");
+                firework.className = "fireworks";
+                firework.style.left = x + "px";
+                firework.style.top = y + "px";
+                firework.style.background = [
+                    "#667eea",
+                    "#764ba2",
+                    "#f093fb",
+                    "#f5576c",
+                ][Math.floor(Math.random() * 4)];
+
+                document.body.appendChild(firework);
+
+                const angle = (i / 20) * Math.PI * 2;
+                const velocity = Math.random() * 5 + 3;
+                let vx = Math.cos(angle) * velocity;
+                let vy = Math.sin(angle) * velocity;
+                let life = 100;
+
+                const interval = setInterval(() => {
+                    life -= 5;
+                    vx *= 0.98;
+                    vy *= 0.98;
+                    vy += 0.1;
+
+                    const newX =
+                        parseFloat(firework.style.left) + vx;
+                    const newY =
+                        parseFloat(firework.style.top) + vy;
+
+                    firework.style.left = newX + "px";
+                    firework.style.top = newY + "px";
+                    firework.style.opacity = life / 100;
+
+                    if (life <= 0) {
+                        clearInterval(interval);
+                        firework.remove();
+                    }
+                }, 30);
+            }
+        }
+
+        function switchStage(fromStage, toStage) {
+            document.getElementById(fromStage).classList.remove("active");
+            document.getElementById(toStage).classList.add("active");
+        }
+
+        function resetForm() {
+            selectedGesture = null;
+            selectedName = null;
+            familyMembers = [];
+
+            document.getElementById("userName").value = "";
+            document.getElementById("familySize").value = "0";
+            document.getElementById("familyNames").innerHTML = "";
+            document.querySelectorAll(".gesture-btn").forEach((btn) => {
+                btn.classList.remove("selected");
+            });
+
+            const continueBtn = document.getElementById("continueBtn2");
+            continueBtn.disabled = true;
+            continueBtn.style.opacity = "0.5";
+            continueBtn.style.cursor = "not-allowed";
+
+            switchStage("stage4", "stage1");
+        }
+
+        // Keyboard navigation
+        document.addEventListener("keypress", (e) => {
+            if (
+                e.key === "Enter" &&
+                document.getElementById("stage1").classList.contains("active")
+            ) {
+                goToStage2();
+            }
+        });
+    </script>
+</body>
 </html>
